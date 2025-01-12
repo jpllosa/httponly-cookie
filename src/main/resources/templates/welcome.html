@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Welcome - HTTP Only Cookie Example</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+<p th:text="|Welcome, ${username} ${password}!|" />
+<p th:text="|MY_SESS: ${mySession}|" />
+<button id="clearMySession">Clear MY_SESSION</button>
+</body>
+
+<script th:inline="javascript">
+    $(document).ready(function() {
+        $("#clearMySession").on("click", function() {
+            console.log("Removing MY_SESSION");
+            document.cookie = "MY_SESSION=; expires=Thu, 01-Jan-70 00:00:01 GMT;";
+        });
+    });
+</script>
+</html>
