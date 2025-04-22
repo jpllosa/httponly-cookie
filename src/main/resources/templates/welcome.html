@@ -8,14 +8,23 @@
 <body>
 <p th:text="|Welcome, ${username} ${password}!|" />
 <p th:text="|MY_SESS: ${mySession}|" />
-<button id="clearMySession">Clear MY_SESSION</button>
+<button id="clearMySession">JS Clear MY_SESSION</button>
+<button id="beClearMySession">BE Clear MY_SESSION</button>
 </body>
 
 <script th:inline="javascript">
     $(document).ready(function() {
         $("#clearMySession").on("click", function() {
-            console.log("Removing MY_SESSION");
+            console.log("JS removing MY_SESSION");
             document.cookie = "MY_SESSION=; expires=Thu, 01-Jan-70 00:00:01 GMT;";
+        });
+
+        $("#beClearMySession").on("click", function() {
+            console.log("BE removing MY_SESSION");
+
+            $.get("/clear-my-session", function() {
+                console.log("Backend removing MY_SESSION");
+            });
         });
     });
 </script>

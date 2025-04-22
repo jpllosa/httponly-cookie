@@ -5,10 +5,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class LoginController {
@@ -48,4 +45,14 @@ public class LoginController {
         return "welcome";
     }
 
+    @GetMapping("/clear-my-session")
+    public @ResponseBody String clearMySession(HttpServletResponse response) {
+
+        Cookie cookie = new Cookie("MY_SESSION", "deleted");
+        cookie.setHttpOnly(true);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+
+        return "";
+    }
 }
